@@ -100,8 +100,8 @@ class Ecomail
      * @param string $list_id ID listu
      * @param string $email Email
      * @return array|stdClass|string
-    */
-    public function getSubscriber($list_id, $email)
+     */
+    public function getSubscriber($list_id, string $email)
     {
         $url = $this->joinString('lists/', $list_id, '/subscriber/', $email);
         return $this->get($url);
@@ -152,6 +152,22 @@ class Ecomail
     {
         $url = $this->joinString('lists/', $list_id, '/subscribe-bulk');
         return $this->post($url, $data);
+    }
+    
+    
+    // === Subscribers ===
+    
+    
+    /**
+     * Remove subscriber from DB (all lists)
+     * 
+     * @param string $email Email
+     * @return array|stdClass|string
+     */
+    public function deleteSubscriber(string $email)
+    {
+        $url = $this->joinString('subscribers/', $email, '/delete');
+        return $this->delete($url);
     }
 
 
@@ -370,6 +386,7 @@ class Ecomail
      * Pomocná metoda pro DELETE
      *
      * @param   string  $request Požadavek
+     * @param   null|array  $data       Zaslaná data
      * @return  array|stdClass|string
      */
     private function delete($request, array $data = [])
