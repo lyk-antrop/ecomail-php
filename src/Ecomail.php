@@ -220,7 +220,7 @@ class Ecomail
      */
     public function sendCampaign($campaign_id)
     {
-        $url = $this->joinString('campaigns/', $campaign_id, '/send');
+        $url = $this->joinString('campaign/', $campaign_id, '/send');
         return $this->get($url);
     }
 
